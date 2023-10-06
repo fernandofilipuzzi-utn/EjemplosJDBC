@@ -17,26 +17,26 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import ar.utn.frp.fernando.ejemplos.producto.dao.pgdbImpl.util.PgdbConfig;
+
 public class PgdbCreateDb {
 
-	public static final String bdUrl = "jdbc:postgresql://localhost/productos?user=postgres&password=123456";
-	public static final String url= "jdbc:postgresql://localhost/productos";
-	
+
 	public static void main(String[] args) {
 		System.out.println("Creando la tablas productos");
 		
-		String string =  " create table productos ("
-												+"   id serial "
-												+" , codigo integer unique "
-												+" , nombre varchar(52) "
-												+" , disponible boolean "
-						+" )";
-					
+		String string =  "create table productos ("
+					+"   id serial "
+					+" , codigo integer unique "
+					+" , nombre varchar(52) "
+					+" , disponible boolean "
+					+" )";
+		
 		System.out.println(string);
 		Connection conn = null;
 		Statement sth=null;
 	    try {
-	        conn = DriverManager.getConnection(bdUrl);
+	        conn = DriverManager.getConnection(PgdbConfig.bdUrl);
 	        sth = conn.createStatement();
 	        sth.execute(string);
 	        //sth.executeQuery(string);

@@ -1,4 +1,4 @@
-package ar.utn.frp.fernando.ejemplos.producto.dao.pgdbImpl;
+package ar.utn.frp.fernando.ejemplos.producto.dao.pgdbImpl.util;
 
 
 public class bdUtil {

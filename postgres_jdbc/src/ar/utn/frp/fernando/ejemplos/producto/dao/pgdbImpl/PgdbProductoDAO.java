@@ -23,6 +23,7 @@ import java.util.List;
 
 import ar.utn.frp.fernando.ejemplos.producto.dao.IProductoDAO;
 import ar.utn.frp.fernando.ejemplos.producto.dao.pgdbImpl.exception.PgdbProductoDAOException;
+import ar.utn.frp.fernando.ejemplos.producto.dao.pgdbImpl.util.PgdbConfig;
 import ar.utn.frp.fernando.ejemplos.producto.modelo.Producto;
 
 public class PgdbProductoDAO implements IProductoDAO {
@@ -38,15 +39,14 @@ public class PgdbProductoDAO implements IProductoDAO {
 		   									  			+" order by o.codigo "
 		   									  			+" limit ?1 offset ?2 ";
 	
-	public static final String bdUrl = "jdbc:postgresql://localhost/productos?user=postgres&password=123456";
-	public static final String url= "jdbc:postgresql://localhost/productos";	
+	
 	
 	public PgdbProductoDAO(){
 		super();
 	}
 
 	public Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection(bdUrl);
+		Connection connection = DriverManager.getConnection(PgdbConfig.bdUrl);
 		return connection;
 	}
 	
@@ -283,37 +283,3 @@ public class PgdbProductoDAO implements IProductoDAO {
 	}
 	
 }
-
-/*
- * org.postgresql.util.PSQLException: This ResultSet is closed.
-	at org.postgresql.jdbc2.AbstractJdbc2ResultSet.checkClosed(AbstractJdbc2ResultSet.java:2674)
-	at org.postgresql.jdbc2.AbstractJdbc2ResultSet.next(AbstractJdbc2ResultSet.java:1806)
-	at pgdao.PgdbProductoDAO.findAll(PgdbProductoDAO.java:225)
-	at tablemodel.ProductosTableModel.actualizar(ProductosTableModel.java:129)
-	at custom.componente.Paginador.actionPerformed(Paginador.java:126)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1995)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2318)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:242)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:236)
-	at java.awt.Component.processMouseEvent(Component.java:6263)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3255)
-	at java.awt.Component.processEvent(Component.java:6028)
-	at java.awt.Container.processEvent(Container.java:2041)
-	at java.awt.Component.dispatchEventImpl(Component.java:4630)
-	at java.awt.Container.dispatchEventImpl(Container.java:2099)
-	at java.awt.Component.dispatchEvent(Component.java:4460)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4574)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4238)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4168)
-	at java.awt.Container.dispatchEventImpl(Container.java:2085)
-	at java.awt.Window.dispatchEventImpl(Window.java:2475)
-	at java.awt.Component.dispatchEvent(Component.java:4460)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:599)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:269)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:184)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:174)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:169)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:161)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:122)
- * */
